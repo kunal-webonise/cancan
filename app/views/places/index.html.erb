@@ -1,0 +1,52 @@
+<%= form_tag("/search", method: "get") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+<% end %>
+
+<script>
+    $(function() {
+        var data = [];
+        $( "#q" ).keyup(function() {
+            $.ajax({
+                type:"GET",
+                url : "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=del&sensor=true&key=AIzaSyC4tBSj4YaEbKVEhBCvd3NwqIydNcQUs4",
+                success : function(response) {
+                    data = response;
+                    console.log(data)
+                    return response;
+                },
+                error: function() {
+                    alert('Error occured');
+                }
+            });
+            $( "#q" ).autocomplete({
+                source: data
+            });
+        });
+//        var availableTags = [
+//            "ActionScript",
+//            "AppleScript",
+//            "Asp",
+//            "BASIC",
+//            "C",
+//            "C++",
+//            "Clojure",
+//            "COBOL",
+//            "ColdFusion",
+//            "Erlang",
+//            "Fortran",
+//            "Groovy",
+//            "Haskell",
+//            "Java",
+//            "JavaScript",
+//            "Lisp",
+//            "Perl",
+//            "PHP",
+//            "Python",
+//            "Ruby",
+//            "Scala",
+//            "Scheme"
+//        ];
+
+    });
+</script>
